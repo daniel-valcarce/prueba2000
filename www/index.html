@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
+         <link rel="stylesheet" type="text/css" href="js/jquery_ui/jquery-ui.css" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <script type="text/javascript" src="js/jquery_ui/external/jquery/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery_ui/jquery-ui.js"></script>
+        <title>Hello World</title>
+    </head>
+    <body>
+  
+         <div id="container">
+            <header>
+                <h1 id="titulo">Servim<img src="img/llanta.jpg" width="100px" height="100px">t<img                   src="img/llanta.jpg" width="100px" height="100px"></h1>
+            </header>
+            
+            <section class="contenido">
+                <h1>Inicio de Sesion</h1>
+                <div id="form_inicio">
+                     <table>
+                           
+                    
+                           <tr>
+                               <td>Usuario</td>
+                               <td><input id="usuario_session" type="text" required ="required"></td>
+                           </tr>
+                            <tr>
+                               <td>Clave</td>
+                               <td><input id="clave_session" type="password" required="required"></td>
+                           </tr>
+                           <tr>
+                               <td></td>
+                               <td><input id="enviar_form_inicio" type="button"  value="Enviar"></td>
+                           </tr>
+                  
+                       
+                           
+                        </table>
+                       
+                    
+                </div>
+            </section>
+            
+            <footer>
+                 <p><a href="recuperarpass.html">Olvido su contraseña</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                               <a href="registrarse.html">Registrarse</a></p>
+            </footer>   
+        
+        
+        
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+             $("#enviar_form_inicio").on("click", function(){
+              
+                  
+                    var usuario_dato = $("input#usuario_session").val();
+                    var clave_dato   = $("input#clave_session").val();
+
+         $.ajax({
+                        url:"http://hostinpageval.6te.net/php/probando.php",  
+                        type:"POST",
+                        dataType:"json",
+                        data:{usuario:usuario_dato, clave:clave_dato, inicio_session:"session"},
+                        success: function(resp){
+                            alert("Dentramos con exito");
+                                           
+                       alert(resp["mensaje"]);
+                         }, 
+                             error: function(jq, status, error){
+                                 alert("Aca paso algo raro");
+                                   $("input#usuario_session").val("");
+                                   $("input#clave_session").val("");
+                             }
+                        });   
+                     });   
+      
+        </script>
+    </body>
+</html>
